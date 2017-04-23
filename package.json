@@ -1,0 +1,23 @@
+{
+  "name": "hyperbloom-trust",
+  "version": "1.0.0",
+  "description": "",
+  "main": "lib/trust.js",
+  "scripts": {
+    "test": "mocha --reporter=spec test/*-test.js"
+  },
+  "keywords": [],
+  "author": "Fedor Indutny <fedor@indutny.com> (http://darksi.de/)",
+  "license": "MIT",
+  "devDependencies": {
+    "mocha": "^3.2.0",
+    "rimraf": "^2.6.1",
+    "sodium-signatures": "^2.0.0"
+  },
+  "dependencies": {
+    "async": "^2.3.0",
+    "hyperbloom-chain": "git://github.com/indutny/hyperbloom-chain.git",
+    "hyperbloom-constants": "git://github.com/indutny/hyperbloom-constants.git",
+    "level": "^1.6.0"
+  }
+}
