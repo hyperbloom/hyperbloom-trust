@@ -82,4 +82,12 @@ describe('Trust', () => {
       });
     });
   });
+
+  it('should return empty chain when needed', (cb) => {
+    trust.getChain(self.publicKey, (err, actual) => {
+      assert(!err);
+      assert.deepEqual(actual, []);
+      cb();
+    });
+  });
 });
