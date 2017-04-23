@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "async": "^2.3.0",
+    "debug": "^2.6.4",
     "hyperbloom-chain": "git://github.com/indutny/hyperbloom-chain.git",
     "hyperbloom-constants": "git://github.com/indutny/hyperbloom-constants.git",
     "level": "^1.6.0"
