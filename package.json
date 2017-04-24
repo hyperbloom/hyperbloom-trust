@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/hyperbloom/hyperbloom-node.git"
+    "url": "git://github.com/hyperbloom/hyperbloom-trust.git"
   },
   "keywords": [ "hyperbloom", "trust", "chain", "storage" ],
   "author": "Fedor Indutny <fedor@indutny.com> (http://darksi.de/)",
