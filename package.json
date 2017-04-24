@@ -1,6 +1,6 @@
 {
   "name": "hyperbloom-trust",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "HyperBloom Trust Chain storage",
   "main": "lib/trust.js",
   "scripts": {
@@ -10,7 +10,12 @@
     "type": "git",
     "url": "git://github.com/hyperbloom/hyperbloom-trust.git"
   },
-  "keywords": [ "hyperbloom", "trust", "chain", "storage" ],
+  "keywords": [
+    "hyperbloom",
+    "trust",
+    "chain",
+    "storage"
+  ],
   "author": "Fedor Indutny <fedor@indutny.com> (http://darksi.de/)",
   "license": "MIT",
   "devDependencies": {
