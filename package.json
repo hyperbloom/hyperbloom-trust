@@ -1,12 +1,16 @@
 {
   "name": "hyperbloom-trust",
   "version": "1.0.0",
-  "description": "",
+  "description": "HyperBloom Trust Chain storage",
   "main": "lib/trust.js",
   "scripts": {
     "test": "mocha --reporter=spec test/*-test.js"
   },
-  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/hyperbloom/hyperbloom-node.git"
+  },
+  "keywords": [ "hyperbloom", "trust", "chain", "storage" ],
   "author": "Fedor Indutny <fedor@indutny.com> (http://darksi.de/)",
   "license": "MIT",
   "devDependencies": {
@@ -17,8 +21,8 @@
   "dependencies": {
     "async": "^2.3.0",
     "debug": "^2.6.4",
-    "hyperbloom-chain": "git://github.com/hyperbloom/hyperbloom-chain.git",
-    "hyperbloom-constants": "git://github.com/hyperbloom/hyperbloom-constants.git",
+    "hyperbloom-chain": "^1.0.0",
+    "hyperbloom-constants": "^1.1.0",
     "level": "^1.6.0",
     "lru": "^3.1.0"
   }
