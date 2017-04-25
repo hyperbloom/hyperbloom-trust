@@ -131,4 +131,22 @@ describe('Trust', () => {
       });
     });
   });
+
+  it('should cache chains', (cb) => {
+    const chain = [ edge(0, 1), edge(1, -1) ];
+
+    const root = pairs[0].publicKey;
+    trust.addChain(root, chain, (err) => {
+      assert(!err);
+
+      trust.getChain(root, (err, expected) => {
+        assert(!err);
+        trust.getChain(root, (err, actual) => {
+          assert(!err);
+          assert.deepEqual(actual, expected);
+          cb();
+        });
+      });
+    });
+  });
 });
