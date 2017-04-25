@@ -10,6 +10,11 @@ const Trust = require('../');
 
 const DB_DIR = path.join(__dirname, 'tmp');
 
+function equalChains(a, b) {
+  assert.deepEqual(a.map(x => x.toString('base64')),
+                   b.map(x => x.toString('base64')));
+}
+
 describe('Trust', () => {
   const self = signatures.keyPair();
 
@@ -22,7 +27,7 @@ describe('Trust', () => {
   let now;
 
   beforeEach(() => {
-    now = Date.now();
+    now = Date.now() / 1000;
     rimraf.sync(DB_DIR);
     trust = new Trust({
       db: DB_DIR,
@@ -32,7 +37,10 @@ describe('Trust', () => {
   });
 
   afterEach((cb) => {
-    trust.close(cb);
+    trust.close(() => {
+      rimraf.sync(DB_DIR);
+      cb();
+    });
   });
 
   function toPair(i) {
@@ -45,7 +53,8 @@ describe('Trust', () => {
 
     const chain = new HyperChain({ root: from.publicKey });
     if (!expiration)
-      expiration = now / 1000 + 1000;
+      expiration = 1000;
+    expiration += now;
     return chain.issueLink({ publicKey: to.publicKey, expiration },
                            from.secretKey);
   }
@@ -59,7 +68,7 @@ describe('Trust', () => {
 
       trust.getChain(root, (err, actual) => {
         assert(!err);
-        assert.deepEqual(actual, chain);
+        equalChains(actual, chain);
         cb();
       });
     });
@@ -76,7 +85,7 @@ describe('Trust', () => {
         assert(!err);
         trust.getChain(root, (err, actual) => {
           assert(!err);
-          assert.deepEqual(actual, shortChain);
+          equalChains(actual, shortChain);
           cb();
         });
       });
@@ -88,6 +97,38 @@ describe('Trust', () => {
       assert(!err);
       assert.deepEqual(actual, []);
       cb();
+    });
+  });
+
+  it('should invalidate expiring links', (cb) => {
+    const longChain = [ edge(0, 1), edge(1, 2), edge(2, -1) ];
+    const shortChain = [ edge(0, 3, 0.5), edge(3, -1, 0.5) ];
+
+    const root = pairs[0].publicKey;
+
+    function expireCheck() {
+      trust.getChain(root, (err, actual) => {
+        assert(!err);
+        equalChains(actual, longChain);
+        cb();
+      });
+    }
+
+    function check() {
+      trust.getChain(root, (err, actual) => {
+        assert(!err);
+        equalChains(actual, shortChain);
+
+        setTimeout(expireCheck, 1000);
+      });
+    }
+
+    trust.addChain(root, longChain, (err) => {
+      assert(!err);
+      trust.addChain(root, shortChain, (err) => {
+        assert(!err);
+        check();
+      });
     });
   });
 });
