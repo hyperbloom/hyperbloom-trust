@@ -1,6 +1,6 @@
 {
   "name": "hyperbloom-trust",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "HyperBloom Trust Chain storage",
   "main": "lib/trust.js",
   "scripts": {
